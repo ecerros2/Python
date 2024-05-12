@@ -1,0 +1,70 @@
+from bs4 import BeautifulSoup
+
+import requests
+
+import pandas as pd
+
+from datetime import datetime
+
+import os
+
+import time 
+
+ 
+
+ 
+
+def automated_stock_pull():
+
+    url = 'https://finance.yahoo.com/quote/CWAN'
+
+ 
+
+    page = requests.get(url)
+
+ 
+
+    soup = BeautifulSoup(page.text, 'html')
+
+ 
+
+    stock_name = soup.find('h1', class_ = 'svelte-3a2v0c').text #Pulling the Stock Name (Clearwater Analytics Holdings, Inc. (CWAN) )
+
+ 
+
+    stock_price = soup.find('fin-streamer', class_ = 'livePrice svelte-mgkamr').text #stock price
+
+ 
+
+    date_time = datetime.now()
+
+ 
+
+    dict = {'Stock Name': stock_name,
+
+            'Stock Price': stock_price,
+
+            'Time Stamp' : date_time}
+
+ 
+
+    df = pd.DataFrame([dict])
+
+ 
+
+    if os.path.exists(r'C:\Users\ecerros\Python\CW_Stock_Price.csv'):
+
+        df.to_csv(r'C:\Users\ecerros\Python\CW_Stock_Price.csv', mode = 'a', header = False, index = False)
+
+    else:
+
+        df.to_csv(r'C:\Users\ecerros\Python\CW_Stock_Price.csv', index = False)
+
+    print(df) 
+ 
+
+while True:
+
+    automated_stock_pull()
+
+    time.sleep(10) 
