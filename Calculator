@@ -1,0 +1,42 @@
+def add(x,y):
+    return x + y
+
+def subtract(x,y):
+    return x - y
+
+def multiply(x,y):
+    return x * y
+
+def divide(x,y):
+    return x / y
+     
+
+print("Enter 'A' for Addition: 'S' for Subtraction : 'M' for Multiplication : 'D' for Division")
+
+
+while True: 
+    choice = input('Enter Choice (A,S,M,D): ')
+    
+    if choice.upper() in ('A', 'ADD', 'ADDITION','SUBTRACT', 'SUBTRACTION', 'S','MULTIPLY', 'MULTIPLICATION', 'M','DIVIDE', 'DIVISION', 'D'):
+        num1 = float(input('Enter First Number: '))
+        num2 = float(input('Enter Second Number: '))
+
+        if choice.upper() in ('A', 'ADD', 'ADDITION'):
+            print('Result: ', num1, '+' , num2, '=', add(num1,num2))
+
+        elif choice.upper() in ('SUBTRACT', 'SUBTRACTION', 'S'):
+            print('Result: ', num1, '-' , num2, '=', subtract(num1,num2))
+        
+        elif choice.upper() in ('MULTIPLY', 'MULTIPLICATION', 'M'):
+            print('Result: ', num1, '*' , num2, '=', multiply(num1,num2))
+        
+        elif choice.upper() in ('DIVIDE', 'DIVISION', 'D'):
+            print('Result: ', num1, '/' , num2, '=', divide(num1,num2))
+
+    else:
+        print("Please input a correct choice")
+        
+    next_calculation = input("Want to do another calculation? (yes/no?): ")
+    if next_calculation.lower in ('no', 'n', 'nope'):
+         break
+     
